@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta name="google-signin-scope" content="profile email">
+	<meta name="google-signin-client_id" content="731728813424-irrufd9j24i8eraopepd2f276srj2asv.apps.googleusercontent.com">
+
+    <title>Troye Dashboard</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+	
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script type = "phonegap.js"></script>
+		<script type = "cordova.js"></script>
+	
+</head>
+
+<script>
+	function setup(){	
+	if (localStorage.getItem("email") != null){
+			var name = window.localStorage.getItem("name");
+			var email = window.localStorage.getItem("email");
+			document.getElementById("welcome").innerHTML = "<div id = 'welcome'><legend>"+name +" -- This is your dashboard</legend></div>";
+			
+			var obj=$.ajax({url:"http://cs.ashesi.edu.gh/~csashesi/class2016/obed-nsiah/mobileweb/troye/functions/dashboard.php?contributor="+email,async:false});
+			var response = obj.responseText;
+			document.getElementById("content").innerHTML = response;
+		}else{
+		window.location.href = "login.html";
+		}
+	}
+	
+	function groupview(cr,gr){
+		var obj=$.ajax({url:"http://cs.ashesi.edu.gh/~csashesi/class2016/obed-nsiah/mobileweb/troye/functions/groupview.php?creator="+cr+"&name="+gr,async:false});
+			var response = obj.responseText;
+			document.getElementById("content").innerHTML = response;
+		
+	}
+	
+	function add(){
+		var name = document.getElementById("name").value;
+		var creator = document.getElementById("creator").value;
+		var in1 = document.getElementById("input1").value;
+		var in2 = document.getElementById("input2").value;
+		var in3 = document.getElementById("input3").value;
+		var in4 = document.getElementById("input4").value;
+		var in5 = document.getElementById("input5").value;
+		var in6 = document.getElementById("input6").value;
+		var in7 = document.getElementById("input7").value;
+	
+		var obj=$.ajax({url:"http://cs.ashesi.edu.gh/~csashesi/class2016/obed-nsiah/mobileweb/troye/functions/add.php?creator="+creator+"&name="+name+"&input1="+in1+"&input2="+in2+"&input3="+in3+"&input4="+in4+"&input5="+in5+"&input6="+in6+"&input7="+in7,async:false});
+			var response = obj.responseText;
+			
+	window.location.href = "dashboard.html";
+	}
+</script>
+
+<body onload = "setup()">
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Dashboard</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Your Groups <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li id = "user" class = "dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Welcome<span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+            <li><a href="#">Sign out</a></li>
+          </ul>
+		  </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class = "container">
+	<div class = "row">
+			<div id = 'welcome'>klk</div>
+		  <div class="col-lg-12 col-lg-offset">
+		  <div id = "content"></div>
+		
+		
+		 </div>
+		
+		
+	
+			<a href="create_project.html" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   Create a group project</a>
+			<br><br>
+   
+		
+		
+	</div>
+</div>
+
+
+
+
+
+
+
+ 
+ 
+   <!-- Footer -->
+   <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Troye</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; Nifty Lad 2015. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

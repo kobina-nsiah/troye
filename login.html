@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta name="google-signin-scope" content="profile email">
+	<meta name="google-signin-client_id" content="731728813424-irrufd9j24i8eraopepd2f276srj2asv.apps.googleusercontent.com">
+
+    <title>Log in</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+	
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script type = "phonegap.js"></script>
+		<script type = "cordova.js"></script>
+	
+	<script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+		//alert("klk");
+		
+        var profile = googleUser.getBasicProfile();
+		//alert("Name: " + profile.getName());
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log("Name: " + profile.getName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+		//alert("dfghjk");
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+		
+		var email = profile.getEmail();
+		var name = profile.getName();
+		var image = profile.getImageUrl();
+		//var p = document.getElementById("inputPassword").value;
+		//var obj=$.ajax({url:"http://cs.ashesi.edu.gh/~csashesi/class2016/obed-nsiah/mobileweb/troye/functions/login.php?email="+email+"&password="+p,async:false});
+		var obj=$.ajax({url:"http://cs.ashesi.edu.gh/~csashesi/class2016/obed-nsiah/mobileweb/troye/functions/signup.php?email="+email+"&name="+name,async:false});
+		//var response = obj.responseText;
+		window.localStorage.setItem("email", email);
+				window.localStorage.setItem("name", name);
+
+		window.localStorage.setItem("image", image);
+		//alert("kohjkk");
+		window.location.href = "dashboard.html";
+		//alert("jkkk");
+      }
+	  
+	  function login(){
+		var email = document.getElementById("inputEmail").value;
+		var p = document.getElementById("inputPassword").value;
+		var obj=$.ajax({url:"http://cs.ashesi.edu.gh/~csashesi/class2016/obed-nsiah/mobileweb/troye/functions/login.php?email="+email+"&password="+p,async:false});
+		//another ajax to get just name another obj1
+		var response = obj.responseText;
+		
+		window.localStorage.setItem("email", email);
+	
+
+		window.location.href = response;
+		
+	  }
+    </script>
+	
+
+</head>
+
+<body>
+    <!-- Navigation -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Troye</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="signup.html">Sign up</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+   
+
+	<div class="container">	
+		<div class="row">
+		
+			<div class="page-header">
+              <h1 id="navs">Log in</h1>
+            </div>
+			<div class="col-lg-4 col-lg-offset-1">	
+				<form class="form-horizontal">
+				<fieldset>
+					<legend>Enter your details</legend>
+					 <div class="form-group">
+					  <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+					  <div class="col-lg-10">
+						<input type="text" class="form-control" id="inputEmail" placeholder="Email">
+					  </div>
+					</div>
+					<div class="form-group">
+					  <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+					  <div class="col-lg-10">
+						<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+						
+					  </div>
+					  </div>
+					   
+					
+					
+					
+   
+				</fieldset>
+				</form>
+				<div class="form-group">
+				   <div class="col-lg-10 col-lg-offset-2">
+
+        <button type="submit" class="btn btn-primary" onclick = "login()">Submit</button>
+      </div>
+	  </div>
+				
+				<div class="col-lg-10 col-lg-offset-2">
+				<p>Or Sign in with your Google account</p>
+				<div class="g-signin2" data-onsuccess="onSignIn"></div>
+				<p></p>
+				</div>
+				
+
+			</div>
+			
+			
+			<div class="col-lg-4 col-lg-offset-2">	
+				<img class="img-responsive" src="img/troye.png" alt="troye" height="78%" width = "78%">
+				<p><br><br></p>
+			</div>
+
+		</div>
+	</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Troye</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; Nifty Lad 2015. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
